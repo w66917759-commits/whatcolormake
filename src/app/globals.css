@@ -39,6 +39,7 @@ a {
 .color-game-ribbon {
   position: absolute;
   inset: auto -8% 5% -8%;
+  pointer-events: none;
   height: 28%;
   background: linear-gradient(
     90deg,
@@ -57,6 +58,8 @@ a {
 }
 
 .game-frame {
+  position: relative;
+  z-index: 1;
   backdrop-filter: blur(8px);
 }
 
