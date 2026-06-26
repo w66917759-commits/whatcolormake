@@ -1,65 +1,91 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ColorGame } from "@/components/ColorGame";
+import { WorksheetPreview } from "@/components/WorksheetPreview";
+import { colorRecipes } from "@/data/colorRecipes";
+
+const arcadeRecipes = colorRecipes.slice(0, 8);
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="overflow-x-hidden bg-[#fffaf1]">
+      <ColorGame />
+
+      <section
+        id="recipes"
+        className="border-y-2 border-stone-950 bg-white px-5 py-10 sm:px-6 lg:px-8"
+      >
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-700">
+                Recipe arcade
+              </p>
+              <h2 className="mt-2 text-3xl font-black text-stone-950">
+                Practice rounds by color
+              </h2>
+            </div>
+            <p className="max-w-xl text-sm font-semibold leading-6 text-stone-600">
+              Each card opens a focused recipe page with paint, light, and ink
+              answers.
+            </p>
+          </div>
+
+          <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {arcadeRecipes.map((recipe) => (
+              <Link
+                key={recipe.slug}
+                href={`/${recipe.slug}`}
+                className="group min-h-44 rounded-[8px] border-2 border-stone-950 bg-[#fffaf1] p-4 transition hover:-translate-y-1 hover:shadow-[6px_6px_0_#111827] focus:outline-none focus:ring-4 focus:ring-stone-300"
+              >
+                <span
+                  aria-hidden="true"
+                  className="block h-12 w-12 rounded-full border-2 border-stone-950 transition group-hover:scale-110"
+                  style={{ backgroundColor: recipe.swatch }}
+                />
+                <span className="mt-4 block">
+                  <span className="block text-lg font-black leading-tight text-stone-950">
+                    {recipe.colorName.toUpperCase()}
+                  </span>
+                  <span className="mt-2 block text-sm font-semibold leading-6 text-stone-600">
+                    {recipe.quickAnswer}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {colorRecipes.slice(8).map((recipe) => (
+              <Link
+                key={recipe.slug}
+                href={`/${recipe.slug}`}
+                className="rounded-[8px] border border-stone-300 bg-white px-3 py-2 text-sm font-black text-stone-700 transition hover:border-stone-950 hover:text-stone-950 focus:outline-none focus:ring-4 focus:ring-stone-300"
+              >
+                {recipe.title.replace("What Colors Make ", "").replace("?", "")}
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="bg-[#f2fbff] px-5 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-700">
+              Offline challenge
+            </p>
+            <h2 className="mt-2 text-3xl font-black text-stone-950">
+              Turn the score chase into a table activity
+            </h2>
+            <p className="mt-3 font-semibold leading-7 text-stone-700">
+              Paint Lab uses red, yellow, and blue as starter colors. Light
+              Mode uses additive RGB. Printer Ink Mode uses CMY and explains
+              why printers add black ink.
+            </p>
+          </div>
+          <WorksheetPreview />
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
