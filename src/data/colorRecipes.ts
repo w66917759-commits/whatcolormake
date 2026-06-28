@@ -10,8 +10,21 @@ export type RecipeSlug =
   | "what-colors-make-black"
   | "what-colors-make-white";
 
+export type WhatColorMakesItSlug =
+  | "what-color-makes-it-blue"
+  | "what-color-makes-it-green"
+  | "what-color-makes-it-orange"
+  | "what-color-makes-it-purple";
+
+export type ColorPageSlug = RecipeSlug | WhatColorMakesItSlug;
+
+export type ColorFaq = {
+  question: string;
+  answer: string;
+};
+
 export type ColorRecipe = {
-  slug: RecipeSlug;
+  slug: ColorPageSlug;
   colorName: string;
   title: string;
   description: string;
@@ -21,9 +34,10 @@ export type ColorRecipe = {
   paintAnswer: string;
   lightAnswer: string;
   inkAnswer: string;
-  relatedQuestions: RecipeSlug[];
+  relatedQuestions: ColorPageSlug[];
   activityPrompt: string;
   swatch: string;
+  faq?: ColorFaq[];
 };
 
 export const colorRecipes: ColorRecipe[] = [
@@ -292,6 +306,258 @@ export const recipesBySlug = new Map(
   colorRecipes.map((recipe) => [recipe.slug, recipe]),
 );
 
+export const whatColorMakesItPages: ColorRecipe[] = [
+  {
+    slug: "what-color-makes-it-blue",
+    colorName: "blue",
+    title: "What Color Makes It Blue?",
+    description:
+      "Learn what color makes it blue in paint, light, and printer ink with simple color-mixing answers.",
+    quickAnswer:
+      "In paint, blue is usually a starter color, so the clearest way to make something blue is to use blue paint. In printer ink, cyan and magenta can make blue.",
+    kidExplanation:
+      "Use blue paint when you want a bright blue result. Mix blue with a little white for light blue or a tiny bit of black for navy.",
+    parentTeacherExplanation:
+      "The answer depends on the color system. Blue is a primary color in classroom paint and RGB light. In CMY printer ink, cyan plus magenta can build blue.",
+    paintAnswer:
+      "Paint Mode: blue is normally a primary paint color. Start with blue paint instead of trying to mix it from other colors.",
+    lightAnswer:
+      "Light Mode: blue is a primary light color. Add blue light to make cyan, magenta, or white with other lights.",
+    inkAnswer: "Printer Ink Mode: cyan plus magenta ink can make blue.",
+    relatedQuestions: [
+      "what-colors-make-blue",
+      "what-color-makes-it-green",
+      "what-color-makes-it-purple",
+    ],
+    activityPrompt:
+      "Paint a blue swatch, then add white to one side and black to another side.",
+    swatch: "#2563eb",
+    faq: [
+      {
+        question: "What color makes it blue?",
+        answer:
+          "For paint, use blue because it is normally a primary paint color. For printer ink, cyan and magenta can make blue.",
+      },
+      {
+        question: "Can yellow and green make blue?",
+        answer:
+          "No. Yellow and green paint usually make yellow-green, not a clean blue.",
+      },
+      {
+        question: "What colors make dark blue?",
+        answer:
+          "Start with blue and add a tiny amount of black or purple, then adjust slowly.",
+      },
+    ],
+  },
+  {
+    slug: "what-color-makes-it-green",
+    colorName: "green",
+    title: "What Color Makes It Green?",
+    description:
+      "Learn what color makes it green in paint, light, and printer ink, including the simple blue and yellow paint recipe.",
+    quickAnswer:
+      "In paint, yellow and blue make green. In printer ink, yellow and cyan make green. In light, green is a primary light color.",
+    kidExplanation:
+      "Start with yellow paint, add blue paint, and stir. More yellow makes a brighter yellow-green, while more blue makes a deeper green.",
+    parentTeacherExplanation:
+      "Green is a secondary color in traditional paint mixing, a primary color in RGB light, and a yellow plus cyan mixture in CMY printer ink.",
+    paintAnswer: "Paint Mode: yellow plus blue makes green.",
+    lightAnswer:
+      "Light Mode: green is a primary light color, so it is not made from other basic lights.",
+    inkAnswer: "Printer Ink Mode: yellow plus cyan ink makes green.",
+    relatedQuestions: [
+      "what-colors-make-green",
+      "what-color-makes-it-blue",
+      "what-color-makes-it-orange",
+    ],
+    activityPrompt:
+      "Mix yellow and blue twice: one batch with more yellow and one with more blue.",
+    swatch: "#22c55e",
+    faq: [
+      {
+        question: "What color makes it green?",
+        answer:
+          "For paint, yellow and blue make green. For printer ink, yellow and cyan make green.",
+      },
+      {
+        question: "Does blue make green by itself?",
+        answer:
+          "No. Blue paint needs yellow paint to make green in a traditional paint mixture.",
+      },
+      {
+        question: "How do you make light green?",
+        answer:
+          "Mix yellow and blue to make green, then add white or a little extra yellow to lighten it.",
+      },
+    ],
+  },
+  {
+    slug: "what-color-makes-it-orange",
+    colorName: "orange",
+    title: "What Color Makes It Orange?",
+    description:
+      "Learn what color makes it orange in paint, light, and printer ink with a clear red and yellow paint answer.",
+    quickAnswer:
+      "In paint, red and yellow make orange. More yellow makes a lighter orange, while more red makes a deeper orange.",
+    kidExplanation:
+      "Start with yellow paint and add a small amount of red. Stir, then add more red if you want the orange to look stronger.",
+    parentTeacherExplanation:
+      "Orange is a secondary paint color in the red-yellow-blue classroom model. In light, orange is closer to strong red plus some green. In printer ink, yellow plus some magenta builds orange.",
+    paintAnswer: "Paint Mode: red plus yellow makes orange.",
+    lightAnswer:
+      "Light Mode: orange can be approximated with strong red light and a smaller amount of green light.",
+    inkAnswer:
+      "Printer Ink Mode: yellow ink plus some magenta can create orange.",
+    relatedQuestions: [
+      "what-colors-make-orange",
+      "what-color-makes-it-green",
+      "what-color-makes-it-purple",
+    ],
+    activityPrompt:
+      "Make three oranges by keeping yellow the same and adding small, medium, and large amounts of red.",
+    swatch: "#f97316",
+    faq: [
+      {
+        question: "What color makes it orange?",
+        answer:
+          "For paint, red and yellow make orange. Start with more yellow than red for a bright orange.",
+      },
+      {
+        question: "Can red make orange by itself?",
+        answer:
+          "No. Red paint needs yellow paint to make orange in a traditional paint mixture.",
+      },
+      {
+        question: "How do you make dark orange?",
+        answer:
+          "Mix red and yellow, then add a tiny amount of red, brown, or black to deepen it.",
+      },
+    ],
+  },
+  {
+    slug: "what-color-makes-it-purple",
+    colorName: "purple",
+    title: "What Color Makes It Purple?",
+    description:
+      "Learn what color makes it purple in paint, light, and printer ink, including the simple red and blue paint recipe.",
+    quickAnswer:
+      "In paint, red and blue make purple. A little white makes lighter purple, and more blue can make a cooler violet.",
+    kidExplanation:
+      "Mix red paint and blue paint together. If the purple is too dark, add a little white and stir again.",
+    parentTeacherExplanation:
+      "Purple is a secondary color in traditional paint mixing. In light, red plus blue makes magenta, and in printer ink, magenta plus cyan or blue-leaning ink can create purple tones.",
+    paintAnswer: "Paint Mode: red plus blue makes purple.",
+    lightAnswer:
+      "Light Mode: red light plus blue light makes magenta, which is close to a bright purple-pink.",
+    inkAnswer:
+      "Printer Ink Mode: magenta plus cyan or blue-leaning ink can create purple.",
+    relatedQuestions: [
+      "what-colors-make-purple",
+      "what-color-makes-it-blue",
+      "what-color-makes-it-orange",
+    ],
+    activityPrompt:
+      "Mix red and blue, then split the mixture and add white to one half.",
+    swatch: "#8b5cf6",
+    faq: [
+      {
+        question: "What color makes it purple?",
+        answer:
+          "For paint, red and blue make purple. Adjust the mix with white, red, or blue to change the shade.",
+      },
+      {
+        question: "Can blue make purple by itself?",
+        answer:
+          "No. Blue paint needs red paint to make purple in a traditional paint mixture.",
+      },
+      {
+        question: "How do you make light purple?",
+        answer:
+          "Mix red and blue to make purple, then add white a little at a time.",
+      },
+    ],
+  },
+];
+
+export const colorPages = [...colorRecipes, ...whatColorMakesItPages];
+
+export const colorPagesBySlug = new Map(
+  colorPages.map((recipe) => [recipe.slug, recipe]),
+);
+
+const extraSearchFaqs: Partial<Record<RecipeSlug, ColorFaq>> = {
+  "what-colors-make-green": {
+    question: "What two colors make green?",
+    answer:
+      "Yellow and blue make green in paint. Add more yellow for yellow-green, or add more blue for a deeper green.",
+  },
+  "what-colors-make-orange": {
+    question: "What two colors make orange?",
+    answer:
+      "Red and yellow make orange in paint. Start with more yellow, then add red slowly.",
+  },
+  "what-colors-make-purple": {
+    question: "What two colors make purple?",
+    answer:
+      "Red and blue make purple in paint. Add white to make a lighter purple.",
+  },
+  "what-colors-make-pink": {
+    question: "What colors make light pink?",
+    answer:
+      "Red and white make pink in paint. Use more white for a softer light pink.",
+  },
+  "what-colors-make-brown": {
+    question: "What colors make brown?",
+    answer:
+      "Red, yellow, and blue can make brown. Orange plus blue can also make a brown paint mixture.",
+  },
+};
+
+function withoutModeLabel(answer: string) {
+  return answer.replace(/^[^:]+:\s*/, "");
+}
+
+export function getColorPageFaq(page: ColorRecipe): ColorFaq[] {
+  if (page.faq) {
+    return page.faq;
+  }
+
+  const generatedFaq: ColorFaq[] = [
+    {
+      question: page.title,
+      answer: page.quickAnswer,
+    },
+  ];
+
+  if (page.slug.startsWith("what-colors-make-")) {
+    const extraFaq = extraSearchFaqs[page.slug as RecipeSlug];
+
+    if (extraFaq) {
+      generatedFaq.push(extraFaq);
+    }
+  }
+
+  generatedFaq.push(
+    {
+      question: `What colors make ${page.colorName} in paint?`,
+      answer: withoutModeLabel(page.paintAnswer),
+    },
+    {
+      question: `Do paint, light, and printer ink make ${page.colorName} the same way?`,
+      answer: `${withoutModeLabel(page.lightAnswer)} ${withoutModeLabel(
+        page.inkAnswer,
+      )}`,
+    },
+  );
+
+  return generatedFaq;
+}
+
 export function getRecipe(slug: string) {
   return recipesBySlug.get(slug as RecipeSlug);
+}
+
+export function getColorPage(slug: string) {
+  return colorPagesBySlug.get(slug as ColorPageSlug);
 }
